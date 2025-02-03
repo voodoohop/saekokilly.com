@@ -449,3 +449,8 @@ p {
 .leaflet-container {
     background: none !important;
 }
+
+.album p {
+    margin-top: 0.2rem;
+    font-size: 0.9rem;
+}

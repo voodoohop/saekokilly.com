@@ -60,12 +60,437 @@ document.addEventListener('DOMContentLoaded', () => {
     // Past events data structure
     const pastEvents = [
         {
-            date: '2023-12-16',
-            venue: 'Schleuse Zwei',
-            location: 'Dusseldorf',
+            date: '2021-09-04',
+            venue: 'Mutant Radio',
+            location: 'OTB Berlin',
             type: 'Live'
         },
-        // ... more past events
+         {
+            date: '2021-09-07',
+            venue: 'Radio Bollwerk',
+             location: 'with Dominik André',
+            type: 'Live'
+        },
+        {
+            date: '2021-09-18',
+            venue: 'Horrorscope',
+            location: 'Sameheads w/Alicia Carerra,Bogdan Orbita',
+            type: 'Live'
+        },
+        {
+            date: '2021-09-19',
+            venue: 'VOODOOHOP',
+            location: 'Gaswerksiedelung',
+            type: 'Live'
+        },
+        {
+            date: '2021-10-02',
+             venue: 'Arkaoda',
+            location: 'w/Andre Pahl,Mr.Monday',
+            type: 'Live'
+       },
+         {
+             date: '2021-10-03',
+            venue: 'ZIEGRA KINDER',
+            location: 'Ziegrastrasse',
+            type: 'Live'
+        },
+         {
+             date: '2021-10-16',
+             venue: 'OTB',
+            location: 'w/Sanja Cozma',
+             type: 'Live'
+        },
+         {
+            date: '2021-10-20',
+             venue: 'Musicas dispares',
+             location: 'Crack Bellmer',
+             type: 'Live'
+         },
+         {
+             date: '2021-10-30',
+            venue: 'Marvin\'s Dream after party',
+            location: 'MONOM w/voodoohop',
+             type: 'Live'
+        },
+         {
+             date: '2021-11-19',
+            venue: 'Sameheads',
+             location: 'w/DJ Sofa, Tako',
+            type: 'Live'
+        },
+         {
+            date: '2021-12-11',
+            venue: 'Arkaoda',
+            location: '(Live)w/Alicia Carrera,Diamin,So Far',
+             type: 'Live'
+        },
+        {
+            date: '2022-03-09',
+            venue: 'HeadsRadio',
+            location: '(Live)',
+             type: 'Live'
+        },
+        {
+            date: '2022-04-01',
+            venue: 'Paloma bar',
+           location: '',
+            type: 'DJ'
+        },
+         {
+            date: '2022-04-26',
+            venue: 'Museum of Communication Berlin',
+            location: 'Glitches#2',
+            type: 'DJ'
+        },
+         {
+            date: '2022-04-30',
+            venue: 'Sameheads',
+             location: 'Mutant Radio night',
+            type: 'DJ'
+        },
+         {
+             date: '2022-05-07',
+            venue: 'OTB',
+            location: '(Bordinstr.232)',
+            type: 'DJ'
+        },
+         {
+            date: '2022-05-25',
+            venue: 'Loophole',
+            location: 'ecoutes au vert',
+           type: 'Live'
+        },
+        {
+           date: '2022-06-03',
+            venue: 'Alphonse Kreuzberg',
+            location: '',
+            type: 'DJ'
+        },
+        {
+            date: '2022-06-06',
+            venue: 'KaterBlau',
+            location: '',
+            type: 'DJ'
+        },
+         {
+            date: '2022-06-24',
+             venue: 'gArten',
+            location: 'w/Harmony Molina, Chris Imler',
+            type: 'DJ'
+        },
+        {
+           date: '2022-07-03',
+            venue: 'Fusion Festival',
+           location: 'Karl Kutter',
+             type: 'Live'
+        },
+        {
+            date: '2022-07-08',
+            venue: 'Pop im Ausland',
+             location: '',
+           type: 'Live'
+        },
+        {
+           date: '2022-07-15',
+            venue: 'Cosmic Gathering Chemnitz',
+             location: '',
+            type: 'Live'
+        },
+       {
+            date: '2022-07-30',
+            venue: 'Soukmachines',
+             location: 'Paris',
+             type: 'DJ'
+        },
+         {
+            date: '2022-08-06',
+            venue: 'Garbicz Festival',
+            location: '(See Floor)in Poland',
+            type: 'Live'
+        },
+        {
+            date: '2022-08-11',
+             venue: 'PANGEA Festival',
+             location: '',
+             type: 'Live'
+        },
+         {
+            date: '2022-08-13',
+            venue: 'Jonny Knuppel',
+            location: '(Berlin)',
+             type: 'Live'
+        },
+         {
+            date: '2022-08-20',
+            venue: 'Bucht der träumer',
+            location: '(Helensee/Berlin)',
+             type: 'Live'
+        },
+         {
+           date: '2022-08-27',
+            venue: 'Gaswerk Birthday party',
+             location: '',
+            type: 'DJ'
+        },
+         {
+            date: '2022-09-03',
+             venue: 'artists.unlimited',
+            location: '(Bielefeld)',
+            type: 'Live'
+        },
+         {
+            date: '2022-09-16',
+            venue: 'MULTITUDE Festival',
+             location: '(Hannover)',
+            type: 'Live'
+        },
+       {
+            date: '2022-09-22',
+             venue: 'SAMEHEADS for CUMGIRL8',
+            location: '',
+            type: 'DJ'
+        },
+         {
+            date: '2022-10-03',
+            venue: 'Mutant Radio',
+            location: 'Streaming',
+            type: 'DJ'
+        },
+         {
+            date: '2022-10-07',
+            venue: 'Arkaoda Berlin',
+             location: '',
+            type: 'DJ'
+        },
+        {
+           date: '2022-10-29',
+             venue: 'Kauz',
+            location: '(Zurich)',
+            type: 'Live'
+        },
+         {
+             date: '2022-11-12',
+            venue: 'Bonna Pot',
+            location: '(Kawasaki/JPN)',
+             type: 'DJ'
+        },
+         {
+           date: '2022-11-26',
+            venue: 'Nagomibar',
+            location: '(Kobe/JPN)w/Thomash,Ground',
+           type: 'DJ'
+        },
+         {
+            date: '2022-12-03',
+            venue: 'Ryukyu Folklore',
+            location: '(Okinawa/JPN)',
+            type: 'DJ'
+        },
+         {
+            date: '2022-12-06',
+            venue: 'SPREAD',
+            location: '(Shimokitazawa/Tokyo)',
+            type: 'Live'
+        },
+        {
+            date: '2022-12-10',
+            venue: 'Bar Bonobo',
+            location: '(Tokyo)',
+            type: 'DJ'
+        },
+         {
+            date: '2023-02-03',
+            venue: 'Ziegra Str.',
+            location: '(Berlin)',
+            type: 'DJ'
+        },
+         {
+            date: '2023-02-23',
+            venue: 'Golden Salon',
+             location: '(Hamburg)',
+             type: 'Live'
+        },
+        {
+            date: '2023-02-24',
+            venue: 'Kultur im Bunker',
+            location: '(Bremen)',
+             type: 'Live'
+        },
+         {
+            date: '2023-02-26',
+             venue: 'Narr Radio',
+            location: '(Leeds,England)streaming',
+             type: 'DJ'
+        },
+       {
+             date: '2023-03-24',
+            venue: 'Ziegra Str.',
+            location: '(Berlin)',
+            type: 'Live'
+        },
+        {
+             date: '2023-03-25',
+            venue: 'BEEK',
+            location: '(Hamburg)',
+            type: 'Live'
+        },
+        {
+           date: '2023-03-31',
+            venue: 'Arkaoda Berlin',
+            location: '',
+            type: 'DJ'
+        },
+         {
+           date: '2023-04-09',
+             venue: 'Klunkekranich Berlin',
+             location: '',
+            type: 'Live'
+        },
+        {
+            date: '2023-04-15',
+             venue: 'Sameheads Berlin',
+            location: '',
+            type: 'Live'
+        },
+         {
+             date: '2023-05-05',
+            venue: 'Urban Spree Berlin',
+             location: '',
+           type: 'Live'
+        },
+       {
+           date: '2023-05-12',
+            venue: 'TBA Geneva',
+             location: '',
+            type: 'Live'
+        },
+        {
+           date: '2023-05-20',
+             venue: 'KAOS Berlin',
+           location: '',
+             type: 'DJ'
+        },
+         {
+            date: '2023-05-26',
+             venue: 'Inport Export Munchen',
+           location: '',
+             type: 'Live'
+        },
+         {
+           date: '2023-05-27',
+             venue: 'City Club',
+            location: '(AUGSBURG)',
+             type: 'DJ'
+        },
+        {
+            date: '2023-06-03',
+             venue: 'Thomash\'s 🎉 🎂 Birthday `Pipeland\' Berlin',
+            location: '(PM for the place)',
+             type: 'DJ'
+        },
+         {
+             date: '2023-07-01',
+            venue: 'Fusion Velvet Soup',
+             location: '',
+           type: 'Live'
+        },
+         {
+           date: '2023-07-07',
+             venue: 'Light, Marzipan and Death',
+            location: '(France)',
+           type: 'Live'
+        },
+        {
+             date: '2023-07-23',
+            venue: 'Balearic Sunday/ Palaispalett',
+             location: '(Dresden)',
+             type: 'Live'
+        },
+        {
+           date: '2023-07-30',
+            venue: 'Zuckerzauber',
+            location: '',
+             type: 'DJ'
+        },
+         {
+           date: '2023-08-12',
+            venue: 'Arkaoda Berlin',
+             location: 'Chill Mountain REC',
+            type: 'Live'
+        },
+         {
+           date: '2023-08-18',
+            venue: 'Cosmic Deluxe',
+             location: '(near Berlin)',
+             type: 'Live'
+        },
+        {
+            date: '2023-08-25',
+           venue: 'SAMEHEADS',
+           location: '(Berin)',
+            type: 'DJ'
+        },
+        {
+            date: '2023-09-01',
+            venue: 'KaterBlau',
+            location: '',
+           type: 'Live'
+        },
+       {
+           date: '2023-09-02',
+            venue: 'Ziegra Strasse',
+            location: '(Berlin)',
+           type: 'Live'
+        },
+        {
+           date: '2023-09-03',
+            venue: 'Lusatia Festival',
+            location: '(Germany)',
+            type: 'DJ'
+        },
+         {
+           date: '2023-09-14',
+            venue: 'Goulash Disco',
+           location: '(Croatia)',
+            type: 'Live & DJ'
+        },
+         {
+            date: '2023-10-19',
+            venue: 'Genezarethkirche',
+             location: '(Berlin)',
+             type: 'Live'
+        },
+         {
+            date: '2023-11-24',
+             venue: 'Zentralwäscherei',
+            location: '(Zurich,CH)',
+             type: 'Live'
+        },
+         {
+            date: '2023-11-25',
+            venue: 'TomTom Klub',
+            location: '(Biel,CH)',
+             type: 'Live'
+        },
+        {
+           date: '2023-12-01',
+            venue: 'Sameheads',
+             location: '(Berlin)',
+           type: 'DJ'
+        },
+         {
+           date: '2023-12-06',
+           venue: 'Headsradio',
+            location: '(Berlin)',
+             type: 'Live'
+        },
+         {
+           date: '2023-12-16',
+            venue: 'Schleuse Zwei',
+             location: 'Dusseldorf',
+             type: 'Live'
+         },
     ];
 
     // Handle past events toggle

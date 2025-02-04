@@ -4,16 +4,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saeko Killy - Electronic Music Artist</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-G0no2j/zPFEdGuObjn66wuwgZh/ আসে6wA+81jXkkIZ8="
-     crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJx1q1izFah9Gk3hn/CBQ5Jqyr+oM="
-     crossorigin=""></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Noto+Serif+JP:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
+    <div class="japanese-pattern"></div>
     <div class="synth-grid"></div>
     
+    <img src="julykfly.png" alt="Flying Cat" class="flying-cat">
+    
+    <div class="banner-psychedelic">
+        <img src="julyk.jpg" alt="Saeko Killy Banner" class="banner-image top-banner">
+    </div>
+    
+    <img src="transparentcats.png" alt="Floating Cats" class="floating-cat">
+
     <header>
         <div class="logo glitch" data-text="SAEKO KILLY">SAEKO KILLY</div>
         <nav>
@@ -35,7 +41,7 @@
                 <img src="https://www.bureau-b.com/images/Saeko_press_4%20(c)%20mobilespot.jpg" alt="Saeko Killy">
             </div>
             <h1 class="glitch" data-text="SAEKO KILLY">SAEKO KILLY</h1>
-            <p class="wave-text">Japanese Electronic Music Artist | DJ | Live Performer</p>
+            <p class="wave-text">日本のエレクトロニック・ミュージシャン | DJ | Live Performer</p>
             <div class="quick-links">
                 <a href="https://saekokilly.bandcamp.com" target="_blank" class="glow-button">Bandcamp</a>
                 <a href="https://www.youtube.com/watch?v=AEsRs1DUS" target="_blank" class="glow-button">Watch 'Alt!' Video</a>
@@ -43,6 +49,8 @@
             </div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <section id="music" class="music-section circuit-overlay">
         <h2 class="glitch" data-text="Latest Releases">Latest Releases</h2>
@@ -70,8 +78,10 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <section id="tour" class="tour-section circuit-overlay">
-        <h2 class="glitch" data-text="Tour Dates">Tour Dates</h2>
+        <h2 class="glitch" data-text="Tour Dates">Tour Dates ツアー日程</h2>
         <div class="tour-dates">
             <div class="tour-dates-grid">
                 <div class="tour-date">
@@ -108,11 +118,13 @@
             <div id="map"></div>
         </div>
         <div class="past-events-container">
-            <button class="past-events-toggle glow-button">Show Past Events</button>
+            <button class="past-events-toggle glow-button">過去のイベントを表示 Show Past Events</button>
             <div class="past-events hidden">
             </div>
         </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <section id="performances" class="performances-section circuit-overlay">
         <h2 class="glitch" data-text="Performance Types">Performance Types</h2>
@@ -136,6 +148,8 @@
         </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <section id="about" class="about-section circuit-overlay">
         <h2 class="glitch" data-text="About Saeko">About Saeko</h2>
         <p>Japanese-born Saeko Okuchi, known as Saeko Killy, began her musical journey at age four with piano, later picking up guitar at sixteen. Through her parents' influence, she discovered jazz and Brazilian music, while Tokyo's techno parties introduced her to electronic dance music.</p>
@@ -156,6 +170,10 @@
             </div>
         </div>
     </section>
+
+    <div class="banner-psychedelic">
+        <img src="julyk.jpg" alt="Saeko Killy Banner" class="banner-image bottom-banner">
+    </div>
 
     <footer>
         <p>&copy; 2024 Saeko Killy. All rights reserved.</p>

@@ -5,6 +5,9 @@
     --glitch-color: #ff00ff;
     --background-grid: rgba(0, 255, 255, 0.05);
     --friendly-bg: #1a1a2a;
+    --ink-black: #17172a;
+    --sakura-pink: rgba(255, 183, 197, 0.8);
+    --zen-gray: #888;
 }
 
 @keyframes noise {
@@ -57,15 +60,59 @@
     100% { transform: translateX(100%); }
 }
 
+@keyframes fly {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(calc(100vw - 200px), 25vh) rotate(90deg);
+  }
+  50% {
+    transform: translate(calc(100vw - 200px), calc(100vh - 200px)) rotate(180deg);
+  }
+  75% {
+    transform: translate(0, calc(100vh - 200px)) rotate(270deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+  }
+}
+
+@keyframes psychedelic {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 200%; }
+}
+
 body {
-    font-family: 'Courier New', monospace;
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--friendly-bg);
+    background-image: 
+        radial-gradient(circle at 50% 50%, var(--ink-black) 0%, transparent 100%),
+        linear-gradient(45deg, rgba(0,0,0,0.2) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(0,0,0,0.2) 25%, transparent 25%);
+    background-size: 100% 100%, 4px 4px, 4px 4px;
     color: var(--secondary-color);
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
+}
+
+.japanese-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(var(--sakura-pink) 2px, transparent 2px),
+        radial-gradient(var(--sakura-pink) 2px, transparent 2px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .synth-grid {
@@ -150,25 +197,30 @@ nav a {
 
 .hero {
     text-align: center;
-    padding: 2rem 2rem 4rem;
+    padding: 4rem 2rem;
     position: relative;
     overflow: hidden;
-    min-height: 80vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
 }
 
-.hero-content {
-    position: relative;
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    height: 100%;
+    background: linear-gradient(45deg, var(--ink-black), transparent);
+    opacity: 0.5;
 }
 
 .hero-image-carousel {
     position: relative;
-    max-width: 600px; /* Reduced max-width for a larger image */
+    max-width: 800px;
     margin: 0 auto 2rem;
 }
 
@@ -200,45 +252,42 @@ nav a {
 .glow-button {
     background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
     border: none;
-    color: var(--primary-color);
+    color: var(--ink-black);
     padding: 0.8rem 1.5rem;
     border-radius: 25px;
-    cursor: pointer;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 1px;
 }
 
-.glow-button:hover {
-    box-shadow: 0 0 20px var(--secondary-color);
-    transform: translateY(-2px);
-}
-
-.glow-button::before {
+.glow-button::after {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
-    transform: scale(0);
-    transition: transform 0.5s ease-out;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2));
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
-.glow-button:hover::before {
-    transform: scale(1);
+.glow-button:hover::after {
+    opacity: 1;
 }
 
-.music-section, .tour-section, .about-section {
+.music-section, 
+.tour-section, 
+.performances-section, 
+.about-section {
     padding: 6rem 2rem;
     max-width: 1400px;
     margin: 0 auto;
     text-align: center;
+    position: relative;
+    z-index: 2;
+    background: rgba(26, 26, 42, 0.9);
 }
 
 .albums {
@@ -248,8 +297,10 @@ nav a {
     margin-top: 3rem;
 }
 
-.album, .tour-date {
-    background-color: rgba(255,255,255,0.1);
+.album {
+    background: rgba(26, 26, 42, 0.8);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
     padding: 1rem;
     border-radius: 10px;
     position: relative;
@@ -266,7 +317,9 @@ nav a {
 
 .performance-type {
     flex: 1;
-    background-color: rgba(255,255,255,0.1);
+    background: rgba(26, 26, 42, 0.8);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
     padding: 1rem;
     border-radius: 10px;
     transition: all 0.3s ease;
@@ -302,10 +355,11 @@ nav a {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .past-events-container {
-    margin-top: 3rem;
+    margin-top: 0;
     text-align: center;
 }
 
@@ -329,6 +383,17 @@ nav a {
     padding: 1rem;
     background: rgba(0,0,0,0.2);
     border-radius: 10px;
+}
+
+.tour-section {
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+}
+
+.tour-date {
+    background: rgba(26, 26, 42, 0.8);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
 }
 
 footer {
@@ -412,8 +477,44 @@ footer {
     filter: hue-rotate(90deg) saturate(2);
 }
 
-section + section {
-    margin-top: 2rem;
+h1, h2, h3 {
+    font-family: 'Noto Serif JP', serif;
+    position: relative;
+}
+
+h2::before {
+    content: '▽';
+    position: absolute;
+    left: -30px;
+    color: var(--sakura-pink);
+    opacity: 0.5;
+}
+
+.section-divider {
+    height: 30px;
+    width: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20c-5.523 0-10-4.477-10-10S14.477 0 20 0s10 4.477 10 10-4.477 10-10 10zm0 0c5.523 0 10 4.477 10 10s-4.477 10-10 10-10-4.477-10-10 4.477-10 10-10z' fill='rgba(0,255,255,0.1)' fill-rule='evenodd'/%3E%3C/svg%3E");
+    margin: 2rem 0;
+    opacity: 0.5;
+}
+
+#map {
+  height: 300px;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+.leaflet-container {
+    background: none !important;
+}
+
+.album p {
+    margin-top: 0.2rem;
+    font-size: 0.9rem;
 }
 
 p {
@@ -422,6 +523,93 @@ p {
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.custom-map-marker {
+    font-size: 20px;
+    color: var(--secondary-color);
+    text-shadow: 0 0 10px var(--secondary-color);
+    transition: all 0.3s ease;
+}
+
+.custom-map-marker:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 15px var(--accent-color);
+}
+
+.custom-map-marker.past {
+    color: var(--sakura-pink);
+    text-shadow: 0 0 10px var(--sakura-pink);
+    opacity: 0.7;
+}
+
+.custom-map-marker.current {
+    color: var(--secondary-color);
+    text-shadow: 0 0 10px var(--secondary-color);
+}
+
+.banner-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 2s ease-in-out;
+}
+
+.banner-image.flip {
+  transform: scaleX(-1);
+}
+
+.banner-psychedelic {
+  position: relative;
+}
+
+.banner-psychedelic::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    rgba(0, 255, 255, 0.1),
+    rgba(255, 0, 255, 0.1),
+    rgba(0, 255, 255, 0.1)
+  );
+  mix-blend-mode: overlay;
+  animation: psychedelic 10s infinite linear;
+  pointer-events: none;
+}
+
+.floating-cat {
+    position: fixed;
+    width: 200px;
+    height: auto;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.7;
+    transition: transform 2s ease-out;
+}
+
+.flying-cat {
+    position: fixed;
+    width: 200px;
+    height: auto;
+    pointer-events: none;
+    z-index: 1;
+    transition: transform 2s ease-out;
+    opacity: 0.8;
+}
+
+.top-banner {
+  margin-bottom: -2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.bottom-banner {
+  margin-top: -2rem;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
@@ -436,21 +624,4 @@ p {
     .tour-dates-grid {
         grid-template-columns: 1fr;
     }
-}
-
-#map {
-  height: 300px;
-  width: 100%;
-  margin-top: 20px;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.leaflet-container {
-    background: none !important;
-}
-
-.album p {
-    margin-top: 0.2rem;
-    font-size: 0.9rem;
 }

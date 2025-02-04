@@ -573,13 +573,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         map.setView([50, 10], 3); // Centered on Europe
 
+        // Custom dark map style with Japanese-inspired colors
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             subdomains: 'abcd',
             maxZoom: 20
         }).addTo(map);
 
-      // Tour Locations (add latitude and longitude)
+        // Add custom styling to map markers
+        const currentIcon = L.divIcon({
+            className: 'custom-map-marker current',
+            html: '▽',
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+        });
+
+        const pastIcon = L.divIcon({
+            className: 'custom-map-marker past',
+            html: '△',
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+        });
+
+        // Tour Locations for current/upcoming events
         const tourLocations = [
             { location: "Milano, Italy", lat: 45.4642, lng: 9.1900, date: 'Mar 21, 24' },
             { location: "Faenza, Italy", lat: 44.2880, lng: 11.8829, date: 'Mar 23, 24' },
@@ -589,9 +605,163 @@ document.addEventListener('DOMContentLoaded', () => {
             { location: "Berlin, Germany", lat: 52.5200, lng: 13.4050, date: 'Apr 25, 24' }
         ];
 
-       tourLocations.forEach(loc => {
-          L.marker([loc.lat, loc.lng]).addTo(map)
-          .bindPopup(`<b>${loc.location}</b><br>${loc.date}`);
-      });
+        // Create a layer group for past events markers
+        const pastMarkersGroup = L.layerGroup().addTo(map);
+
+        // Add current tour locations
+        tourLocations.forEach(loc => {
+            L.marker([loc.lat, loc.lng], { icon: currentIcon }).addTo(map)
+                .bindPopup(`<b>${loc.location}</b><br>${loc.date}`);
+        });
+
+        // Past events city coordinates (approximate)
+        const pastLocations = {
+            "Berlin": { lat: 52.5200, lng: 13.4050 },
+            "Hamburg": { lat: 53.5511, lng: 9.9937 },
+            "Paris": { lat: 48.8566, lng: 2.3522 },
+            "Zurich": { lat: 47.3769, lng: 8.5417 },
+            "Tokyo": { lat: 35.6762, lng: 139.6503 },
+            "Kawasaki": { lat: 35.5309, lng: 139.7029 },
+            "Kobe": { lat: 34.6901, lng: 135.1955 },
+            "Okinawa": { lat: 26.2124, lng: 127.6809 },
+            "Croatia": { lat: 45.1000, lng: 15.2000 },
+            "Bielefeld": { lat: 52.0302, lng: 8.5325 },
+            "Dresden": { lat: 51.0504, lng: 13.7373 },
+            "Geneva": { lat: 46.2044, lng: 6.1432 },
+            "Augsburg": { lat: 48.3705, lng: 10.8978 },
+            "Hannover": { lat: 52.3759, lng: 9.7320 }
+        };
+
+        // Handle past events toggle
+        const pastEventsToggle = document.querySelector('.past-events-toggle');
+        const pastEventsContainer = document.querySelector('.past-events');
+
+        if (pastEventsToggle && pastEventsContainer) {
+            pastEventsToggle.addEventListener('click', () => {
+                const isHidden = pastEventsContainer.classList.contains('hidden');
+                
+                if (isHidden) {
+                    pastEventsContainer.classList.remove('hidden');
+                    pastEventsToggle.textContent = 'Hide Past Events';
+                    
+                    // Add markers for past events
+                    pastEvents.forEach(event => {
+                        // Try to find coordinates for the event location
+                        for (const [city, coords] of Object.entries(pastLocations)) {
+                            if (event.location.includes(city)) {
+                                L.marker([coords.lat, coords.lng], { icon: pastIcon })
+                                    .bindPopup(`<b>${event.venue}</b><br>${new Date(event.date).toLocaleDateString('en-US', {
+                                        year: '2-digit',
+                                        month: 'short',
+                                        day: 'numeric'
+                                    })}<br>${event.type}`)
+                                    .addTo(pastMarkersGroup);
+                                break;
+                            }
+                        }
+                    });
+
+                    // Populate past events if not already done
+                    if (!pastEventsContainer.querySelector('.past-events-grid')) {
+                        const pastEventsGrid = document.createElement('div');
+                        pastEventsGrid.className = 'past-events-grid';
+                        
+                        // Add past events in reverse chronological order
+                        pastEvents.reverse().forEach(event => {
+                            const eventEl = document.createElement('div');
+                            eventEl.className = 'tour-date';
+                            eventEl.innerHTML = `
+                                <h3>${new Date(event.date).toLocaleDateString('en-US', {
+                                    year: '2-digit',
+                                    month: 'short',
+                                    day: 'numeric'
+                                })}</h3>
+                                <p>${event.location}</p>
+                                <p>${event.type} @ ${event.venue}</p>
+                            `;
+                            pastEventsGrid.appendChild(eventEl);
+                        });
+                        
+                        pastEventsContainer.appendChild(pastEventsGrid);
+                    }
+                } else {
+                    pastEventsContainer.classList.add('hidden');
+                    pastEventsToggle.textContent = 'Show Past Events';
+                    // Clear past event markers
+                    pastMarkersGroup.clearLayers();
+                }
+            });
+        }
     }
+
+    // Simpler flying cat animations with just one of each
+    const flyingElements = document.querySelectorAll('.flying-cat, .floating-cat');
+    const positions = new Map();
+    const velocities = new Map();
+    const scales = new Map();
+
+    flyingElements.forEach(element => {
+        positions.set(element, { 
+            x: Math.random() * (window.innerWidth - 200),
+            y: Math.random() * (window.innerHeight - 200)
+        });
+        velocities.set(element, { 
+            x: 1 + Math.random() * 0.5, 
+            y: 0.5 + Math.random() * 0.4, 
+            rotation: 0.1 + Math.random() * 0.2 
+        });
+        scales.set(element, 1);
+    });
+    
+    function animate() {
+        flyingElements.forEach(element => {
+            const pos = positions.get(element);
+            const vel = velocities.get(element);
+            let scale = scales.get(element);
+            
+            const maxX = window.innerWidth - element.offsetWidth;
+            const maxY = window.innerHeight - element.offsetHeight;
+            
+            // Update position
+            pos.x += vel.x;
+            pos.y += vel.y;
+            
+            // Bounce off edges with gradual scale changes
+            if (pos.x >= maxX || pos.x <= 0) {
+                vel.x = -vel.x;
+                if (element.classList.contains('floating-cat')) {
+                    scale = scale === 1 ? 0.8 : 1;
+                }
+            }
+            if (pos.y >= maxY || pos.y <= 0) {
+                vel.y = -vel.y;
+                if (element.classList.contains('floating-cat')) {
+                    scale = scale === 1 ? 0.8 : 1;
+                }
+            }
+            
+            // Apply movement with slower transition
+            element.style.transform = `translate(${pos.x}px, ${pos.y}px) 
+                                     rotate(${vel.rotation}deg) 
+                                     scale(${scale})`;
+            
+            scales.set(element, scale);
+        });
+        
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+
+    // Banner flip effect
+    const banners = document.querySelectorAll('.banner-image');
+    let isFlipped = false;
+
+    setInterval(() => {
+        isFlipped = !isFlipped;
+        banners.forEach(banner => {
+            banner.classList.toggle('flip', isFlipped);
+        });
+    }, 5000);
+
 });
